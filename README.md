@@ -29,16 +29,6 @@ Este site funciona como meu portfólio profissional, reunindo projetos, experiê
 
 ---
 
-## 🚀 Atualizando o site no GitHub
-
-Adicionar novos arquivos na pasta do projeto, abra o terminal do VS Code e utilize:
-
-```bash
-git add .
-git commit -m "Atualização do site"
-git push
-```
-
 ## ⚡ Atalho para atualização
 
 Sempre que fizer alguma alteração no site, basta executar:
