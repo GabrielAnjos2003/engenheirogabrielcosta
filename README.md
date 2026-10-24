@@ -38,13 +38,7 @@ git add .
 git commit -m "Atualização do site"
 git push
 ```
-
 ---
-
-## 📂 Repositório
-
-**engenheirogabrielcosta**
-
 
 Projeto destinado ao desenvolvimento e manutenção do meu site pessoal e portfólio profissional.
 
