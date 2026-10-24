@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#202024"/><stop offset="1" stop-color="#080809"/></linearGradient>
+  <pattern id="grid" width="46" height="46" patternUnits="userSpaceOnUse"><path d="M46 0H0V46" fill="none" stroke="#ffffff" stroke-opacity=".08"/></pattern>
+  <linearGradient id="red" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#626267"/><stop offset="1" stop-color="#d0d0d4"/></linearGradient>
+</defs>
+<rect width="1200" height="760" fill="url(#bg)"/>
+<rect width="1200" height="760" fill="url(#grid)"/>
+<path d="M80 596L250 420l160 70 175-256 170 126 166-205 200 160v281z" fill="#2c2c31" stroke="#ffffff" stroke-opacity=".15" stroke-width="2"/>
+<path d="M80 596L250 420l160 70 175-256 170 126 166-205 200 160" fill="none" stroke="url(#red)" stroke-width="7"/>
+<path d="M250 420v176M410 490v106M585 234v362M755 360v236M921 155v441" stroke="#ffffff" stroke-opacity=".12" stroke-width="2"/>
+<circle cx="585" cy="234" r="10" fill="#b7b7bc"/><circle cx="921" cy="155" r="10" fill="#b7b7bc"/>
+<text x="70" y="95" fill="#b7b7bc" font-family="Arial, sans-serif" font-weight="700" font-size="22" letter-spacing="5">DOCUMENTAÇÃO TÉCNICA</text>
+<text x="70" y="150" fill="#ffffff" font-family="Arial, sans-serif" font-weight="800" font-size="44">DETALHAMENTO EXECUTIVO</text>
+<text x="70" y="700" fill="#ffffff" fill-opacity=".4" font-family="Arial, sans-serif" font-size="20">SUBSTITUA ESTA IMAGEM POR UMA FOTO DO SEU PROJETO</text>
+<text x="1070" y="112" fill="#ffffff" fill-opacity=".12" font-family="Arial, sans-serif" font-weight="800" font-size="90">02</text>
+</svg>
