@@ -1,84 +1,63 @@
-# Portfólio — Gabriel dos Anjos Costa
+# 👷‍♂️ Gabriel Costa | Engenheiro Civil
 
-Site de apresentação profissional desenvolvido em HTML, CSS e JavaScript. O projeto utiliza apenas tons de preto, branco e cinza e não possui seção comercial de serviços.
+Este repositório contém o código-fonte do meu **site pessoal e portfólio profissional**.
 
-## Como abrir no VS Code
+O site foi desenvolvido com o objetivo de apresentar um pouco sobre minha trajetória profissional, meus conhecimentos, projetos realizados e trabalhos desenvolvidos na área da **Engenharia Civil**.
 
-1. Extraia o arquivo ZIP.
-2. Abra a pasta `portfolio-gabriel` no VS Code.
-3. Abra o arquivo `index.html`.
-4. Use a extensão **Live Server** para visualizar o site no navegador.
+## 🌐 Sobre o site
 
-## Dados pessoais inseridos
+O portfólio reúne informações sobre:
 
-O site já está configurado com:
+- 👷 Engenharia Civil
+- 🏗️ Projetos de Engenharia
+- 📐 Projetos e detalhamentos técnicos
+- 🏢 Arquitetura e modelagem
+- 💻 BIM e tecnologias aplicadas à Engenharia
+- 📊 Planejamento e orçamento
+- 📁 Trabalhos e projetos desenvolvidos
+- 📞 Informações para contato
 
-- Telefone e WhatsApp: `(64) 9 9308-5516`
-- Link do WhatsApp: `https://wa.me/5564993085516`
-- Instagram: `@eng_gabriel_costa`
+O objetivo é manter um espaço onde seja possível conhecer melhor meu trabalho, minhas experiências e acompanhar novos projetos.
 
-No arquivo `index.html`, ainda revise:
+---
 
-- `CREA-GO: preencher`
-- `Catalão — Goiás`, caso queira alterar a localização
+## 👨‍💼 Gabriel Costa
 
-Caso deseje incluir um e-mail futuramente, adicione outro item dentro da seção `contact-list`.
+**Engenheiro Civil**
 
-## Como substituir as imagens
+Este site funciona como meu portfólio profissional, reunindo projetos, experiências e trabalhos desenvolvidos ao longo da minha trajetória.
 
-As imagens provisórias estão na pasta `assets`. Você pode:
+---
 
-1. Manter os nomes dos arquivos e substituir o conteúdo por suas imagens; ou
-2. Inserir novas imagens e alterar o caminho no `index.html`.
+## 🚀 Atualizando o site no GitHub
 
-Exemplo:
+Adicionar novos arquivos na pasta do projeto, abra o terminal do VS Code e utilize:
 
-```html
-<img src="assets/meu-projeto-estrutural.jpg" alt="Descrição do projeto" />
+```bash
+git add .
+git commit -m "Atualização do site"
+git push
 ```
 
-Recomendações:
+## ⚡ Atalho para atualização
 
-- Use imagens horizontais.
-- Proporção sugerida: 16:10.
-- Resolução recomendada: 1600 × 1000 px ou superior.
-- Formatos: `.jpg`, `.png` ou `.webp`.
+Sempre que fizer alguma alteração no site, basta executar:
 
-O CSS aplica preto e branco automaticamente às imagens. Para exibir as cores originais, remova esta linha de `styles.css`:
-
-```css
-filter: grayscale(1) contrast(1.05);
+```bash
+git add .
+git commit -m "Atualização do site"
+git push
 ```
 
-## Como editar os projetos
+---
 
-Cada projeto possui três informações no `index.html`:
+## 📂 Repositório
 
-```html
-data-title="Nome do projeto"
-data-description="Descrição do projeto"
-data-tools="Ferramentas utilizadas"
-```
+**engenheirogabrielcosta**
 
-Altere esses textos conforme cada trabalho real.
 
-## Publicar no GitHub Pages
+Projeto destinado ao desenvolvimento e manutenção do meu site pessoal e portfólio profissional.
 
-1. Crie um repositório no GitHub.
-2. Envie todos os arquivos da pasta para o repositório.
-3. Abra **Settings**.
-4. Entre em **Pages**.
-5. Em **Build and deployment**, selecione **Deploy from a branch**.
-6. Escolha a branch `main` e a pasta `/root`.
-7. Salve e aguarde a criação do endereço público.
+---
 
-## Estrutura do projeto
-
-```text
-portfolio-gabriel/
-├── index.html
-├── styles.css
-├── script.js
-├── README.md
-└── assets/
-```
+© Gabriel Costa — Engenharia Civil
