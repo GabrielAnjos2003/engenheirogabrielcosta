@@ -2106,34 +2106,29 @@ button {
   line-height: 1.75;
 }
 
-#modelagem .slides,
-#estruturas .slides {
+#portfolio .slides {
   height: 540px;
   min-height: 0;
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-#modelagem .project-slide,
-#estruturas .project-slide {
+#portfolio .project-slide {
   display: grid;
   grid-template-rows: minmax(0, 1fr) auto;
 }
 
-#modelagem .project-slide::after,
-#estruturas .project-slide::after {
+#portfolio .project-slide::after {
   display: none;
 }
 
-#modelagem .project-slide img,
-#estruturas .project-slide img {
+#portfolio .project-slide img {
   min-height: 0;
   height: 100%;
   object-fit: contain;
   background: #19191b;
 }
 
-#modelagem .project-caption,
-#estruturas .project-caption {
+#portfolio .project-caption {
   position: static;
   inset: auto;
   align-items: center;
@@ -2143,19 +2138,16 @@ button {
   background: #19191b;
 }
 
-#modelagem .project-caption > div,
-#estruturas .project-caption > div {
+#portfolio .project-caption > div {
   min-width: 0;
 }
 
-#modelagem .project-caption small,
-#estruturas .project-caption small {
+#portfolio .project-caption small {
   color: rgba(255, 255, 255, 0.55);
   font-size: 9px;
 }
 
-#modelagem .project-caption h4,
-#estruturas .project-caption h4 {
+#portfolio .project-caption h4 {
   font-size: clamp(18px, 1.8vw, 23px);
   overflow-wrap: anywhere;
 }
@@ -2195,13 +2187,11 @@ button {
     font-size: 12px;
   }
 
-  #modelagem .slides,
-  #estruturas .slides {
+  #portfolio .slides {
     height: 460px;
   }
 
-  #modelagem .project-caption,
-  #estruturas .project-caption {
+  #portfolio .project-caption {
     grid-template-columns: auto minmax(0, 1fr);
     gap: 12px;
     padding: 18px;
@@ -2218,6 +2208,18 @@ button {
 }
 
 
+
+/* Acesso às fotos em tamanho original */
+#portfolio .project-image-link {
+  display: block;
+  min-height: 0;
+  cursor: zoom-in;
+}
+
+#portfolio .project-image-link:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: -4px;
+}
 /* Controles das galerias organizadas por pasta */
 #portfolio .slider-footer {
   flex-wrap: wrap;
