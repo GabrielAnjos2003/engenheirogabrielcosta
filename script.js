@@ -14,28 +14,43 @@ function updatePageState() {
 window.addEventListener('scroll', updatePageState, { passive: true });
 updatePageState();
 
-menuToggle.addEventListener('click', () => {
-  const isOpen = navLinks.classList.toggle('open');
+function setMenuOpen(isOpen) {
+  navLinks.classList.toggle('open', isOpen);
   menuToggle.setAttribute('aria-expanded', String(isOpen));
+  menuToggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+}
+
+menuToggle.addEventListener('click', () => {
+  setMenuOpen(!navLinks.classList.contains('open'));
 });
 
 document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    menuToggle.setAttribute('aria-expanded', 'false');
-  });
+  link.addEventListener('click', () => setMenuOpen(false));
 });
 
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && navLinks.classList.contains('open')) {
+    setMenuOpen(false);
+    menuToggle.focus();
+  }
+});
 
-document.querySelectorAll('.reveal').forEach(element => revealObserver.observe(element));
+const revealElements = document.querySelectorAll('.reveal');
+
+if ('IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealElements.forEach(element => revealObserver.observe(element));
+} else {
+  revealElements.forEach(element => element.classList.add('visible'));
+}
 
 const tabButtons = document.querySelectorAll('.tab-button');
 const tabPanels = document.querySelectorAll('.tab-panel');
@@ -75,85 +90,90 @@ tabButtons.forEach((button, index) => {
 
 document.querySelectorAll('[data-slider]').forEach(slider => {
   const slides = [...slider.querySelectorAll('.project-slide')];
+  if (!slides.length) return;
+
   const dotsContainer = slider.querySelector('.slider-dots');
   const previousButton = slider.querySelector('.prev');
   const nextButton = slider.querySelector('.next');
+  const category = slider.closest('.tab-panel')?.querySelector('.stage-label')?.textContent.trim();
   const positionLabel = document.createElement('span');
   positionLabel.className = 'slider-position';
+  positionLabel.setAttribute('role', 'status');
+  positionLabel.setAttribute('aria-live', 'polite');
+  positionLabel.setAttribute('aria-atomic', 'true');
   slider.querySelector('.slider-controls').prepend(positionLabel);
 
-  let currentIndex = 0;
-  let timerId;
-  let touchStartX = 0;
+  slider.tabIndex = 0;
+  slider.setAttribute('role', 'region');
+  slider.setAttribute('aria-label', category ? `Galeria: ${category}` : 'Galeria de registros');
+  previousButton.setAttribute('aria-label', 'Registro anterior');
+  nextButton.setAttribute('aria-label', 'Próximo registro');
+  dotsContainer.setAttribute('aria-label', 'Indicadores dos registros');
 
-  slides.forEach((_, index) => {
+  let currentIndex = 0;
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  slides.forEach((slide, index) => {
+    slide.setAttribute('role', 'group');
+    slide.setAttribute('aria-label', `Registro ${index + 1} de ${slides.length}`);
+
     const dot = document.createElement('button');
     dot.type = 'button';
-    dot.setAttribute('aria-label', `Mostrar projeto ${index + 1}`);
-    dot.addEventListener('click', () => {
-      showSlide(index);
-      restartTimer();
-    });
+    dot.setAttribute('aria-label', `Mostrar registro ${index + 1} de ${slides.length}`);
+    dot.addEventListener('click', () => showSlide(index));
     dotsContainer.appendChild(dot);
   });
 
   const dots = [...dotsContainer.querySelectorAll('button')];
 
   function showSlide(index) {
-    currentIndex = (index + slides.length) % slides.length;
-    slides.forEach((slide, slideIndex) => slide.classList.toggle('active', slideIndex === currentIndex));
+    const nextIndex = (index + slides.length) % slides.length;
+    const shouldMoveFocus = nextIndex !== currentIndex && slides[currentIndex].contains(document.activeElement);
+    currentIndex = nextIndex;
+
+    if (shouldMoveFocus) slider.focus({ preventScroll: true });
+
+    slides.forEach((slide, slideIndex) => {
+      const isActive = slideIndex === currentIndex;
+      slide.classList.toggle('active', isActive);
+      slide.setAttribute('aria-hidden', String(!isActive));
+      slide.inert = !isActive;
+    });
     dots.forEach((dot, dotIndex) => {
       const isActive = dotIndex === currentIndex;
       dot.classList.toggle('active', isActive);
-      dot.setAttribute('aria-pressed', String(isActive));
+      if (isActive) dot.setAttribute('aria-current', 'true');
+      else dot.removeAttribute('aria-current');
     });
     positionLabel.textContent = String(currentIndex + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
-    positionLabel.setAttribute('aria-label', 'Projeto ' + (currentIndex + 1) + ' de ' + slides.length);
+    positionLabel.setAttribute('aria-label', `Registro ${currentIndex + 1} de ${slides.length}`);
   }
 
-  function startTimer() {
-    window.clearInterval(timerId);
-    timerId = window.setInterval(() => showSlide(currentIndex + 1), 3000);
-  }
+  previousButton.addEventListener('click', () => showSlide(currentIndex - 1));
+  nextButton.addEventListener('click', () => showSlide(currentIndex + 1));
 
-  function stopTimer() {
-    window.clearInterval(timerId);
-  }
-
-  function restartTimer() {
-    stopTimer();
-    startTimer();
-  }
-
-  previousButton.addEventListener('click', () => {
-    showSlide(currentIndex - 1);
-    restartTimer();
+  slider.addEventListener('keydown', event => {
+    if (event.altKey || event.ctrlKey || event.metaKey || event.target.closest('input, textarea, select, [contenteditable="true"]')) return;
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    showSlide(currentIndex + (event.key === 'ArrowRight' ? 1 : -1));
   });
-
-  nextButton.addEventListener('click', () => {
-    showSlide(currentIndex + 1);
-    restartTimer();
-  });
-
-  slider.addEventListener('mouseenter', stopTimer);
-  slider.addEventListener('mouseleave', startTimer);
-  slider.addEventListener('focusin', stopTimer);
-  slider.addEventListener('focusout', startTimer);
 
   slider.addEventListener('touchstart', event => {
     touchStartX = event.changedTouches[0].clientX;
+    touchStartY = event.changedTouches[0].clientY;
   }, { passive: true });
 
   slider.addEventListener('touchend', event => {
-    const movement = event.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(movement) > 45) {
-      showSlide(currentIndex + (movement < 0 ? 1 : -1));
-      restartTimer();
+    const movementX = event.changedTouches[0].clientX - touchStartX;
+    const movementY = event.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(movementX) > 45 && Math.abs(movementX) > Math.abs(movementY)) {
+      showSlide(currentIndex + (movementX < 0 ? 1 : -1));
     }
   }, { passive: true });
 
   showSlide(0);
-  startTimer();
 });
 
 document.getElementById('currentYear').textContent = new Date().getFullYear();

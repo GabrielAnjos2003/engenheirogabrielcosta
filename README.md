@@ -29,6 +29,15 @@ Este site funciona como meu portfólio profissional, reunindo projetos, experiê
 
 ---
 
+
+## Imagens e galerias
+
+As galerias estão organizadas em Arquitetura e modelagem, Complementares, Construção e Infraestrutura. As imagens originais permanecem nas respectivas pastas de `assets/`; o site exibe as cópias WebP de `assets/optimized/` para reduzir o tempo de carregamento. Os registros HEIC também possuem cópias WebP, compatíveis com o navegador.
+
+Para incluir um novo registro, adicione o original à categoria, prepare uma versão WebP e cadastre o slide em `index.html`, com título, texto alternativo, dimensões e link para ampliar. Os contadores e indicadores são gerados automaticamente por `script.js`. A navegação é manual, por botões, teclado ou gesto no celular.
+
+O portfólio apresenta os projetos por meio das galerias de imagens. Os arquivos temporários de preparação e revisão visual ficam em `.portfolio-qa/`, ignorada pelo Git.
+
 ## ⚡ Atalho para atualização
 
 Sempre que fizer alguma alteração no site, basta executar:
